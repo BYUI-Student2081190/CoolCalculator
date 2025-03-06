@@ -1,16 +1,18 @@
 #include <iostream>
-#include <vector>
-#include <string>
 
 using namespace std;
 
 int main()
 {
-    vector<string> msg {"Hello", "C++", "World", "from", "VS Code", "and the C++ extension!"};
+    // Test if you can send a message
+    std::cout << "Hello World!" << std::endl;
 
-    for (const string& word : msg)
-    {
-        cout << word << " ";
-    }
-    cout << endl;
+    // Test if you can save variables
+    int number = 30;
+
+    // Test to see if you can send a message and have a variable in it
+    std::cout << "My favorite number is " << number << "!" << std::endl;
+
+    // End function
+    return 0;
 }
