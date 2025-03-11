@@ -11,13 +11,13 @@ public:
     // Getters.
     int getValue() const;
     // Setters.
-    void setValue(int value);
+    void setValue(int value); // Remove this after testing.
     // Member Functions.
     // Attributes.
 
 private:
     // Attributes.
-    int data;
+    int data; // This is it's place in memory.
 };
 
 // Close the header.
