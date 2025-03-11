@@ -50,7 +50,11 @@ bool inRange (const string testNum, const int minRange, const int maxRange)
     }
 }
 
-// Main function being ran
+// Create the object and return the result.
+
+// Create secret menu.
+
+// Main function being ran.
 int main()
 {
     // CURRENT MAIN.
@@ -76,10 +80,23 @@ int main()
         // Check the input to see if it is 1.) a number, and 2.) in answer range.
         if (isNumb(userInput) && inRange(userInput, 1, 5))
         {
-            // Test this.
-            std::cout << "That is in range" << std::endl;
-            // Break loop for test.
-            mainEnd = true;
+            // Convert the userInput to an int.
+            int conUserInput = std::stoi(userInput);
+
+            // Addition.
+            if (conUserInput == 1)
+            {
+                std::cout << "Addition Selected" << std::endl;
+            } else if (conUserInput == 2) {
+                std::cout << "Subtraction Selected" << std::endl;
+            } else if (conUserInput == 3) {
+                std::cout << "Multiplication Selected" << std::endl;
+            } else if (conUserInput == 4) {
+                std::cout << "Division Selected" << std::endl;
+            } else {
+                // Break the loop because the user is quiting the program.
+                mainEnd = true;
+            }
         } else {
             // Not in range and is not a number.
             std::cout << "Input not reconized... Please input a valid number." << std::endl;
@@ -87,6 +104,13 @@ int main()
             std::this_thread::sleep_for(std::chrono::seconds(2));
         }
     }
+
+    // Quiting message.
+    std::cout << "Thank you for using the Cool Calculator!" << std::endl;
+    std::cout << "Have a cool day! :)" << std::endl;
+
+    // End Main Function.
+    return 0;
 
     // OLD MAIN. (Delete after new main is finished.)
     // // Test if you can send a message.
@@ -148,7 +172,4 @@ int main()
     // std::cout << "Value of Object: " << obj.getValue() << std::endl;
     // obj.setValue(15);
     // std::cout << "New Value of Object: " << obj.getValue() << std::endl;
-
-    // End Main Function.
-    return 0;
 }
