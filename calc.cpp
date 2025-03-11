@@ -11,8 +11,5 @@ int Calc::getValue() const {
 }
 
 // Setters.
-void Calc::setValue(int value) {
-    data = value;
-}
 
 // Calculation Functions.
