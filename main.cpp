@@ -3,6 +3,8 @@
 #include <cctype>
 #include <chrono>
 #include <thread>
+// Include the class into the main file.
+#include "calc.cpp"
 
 using namespace std;
 
@@ -72,7 +74,6 @@ int main()
     }
 
     // Test counting section.
-
     std::cout << "What to see me count?" << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(5));
 
@@ -87,6 +88,13 @@ int main()
 
     // Send message to see if we left the loop.
     std::cout << "Thank you for hanging out with me! Talk to you later! :)" << std::endl;
+
+
+    // Test creating an object.
+    Calc obj(20);
+    std::cout << "Value of Object: " << obj.getValue() << std::endl;
+    obj.setValue(15);
+    std::cout << "New Value of Object: " << obj.getValue() << std::endl;
 
     // End function.
     return 0;
