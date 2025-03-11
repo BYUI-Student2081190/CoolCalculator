@@ -17,7 +17,7 @@ public:
     // Setters.
     void setProblem(int numOne, int numTwo, int problemType);
     // Member Functions.
-    int runProblem() const;
+    void runProblem(); // This is void because it is a fancy setter.
 private:
     // Attributes.
     int data; // This is it's place in memory.
