@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cctype>
+// Added these to use thread sleeping to create better UI.
 #include <chrono>
 #include <thread>
 // Include the class into the main file.
@@ -50,7 +51,22 @@ bool inRange (const string testNum, const int minRange, const int maxRange)
     }
 }
 
-// Create the object and return the result.
+// Test to see if number is 0.
+bool isZero (const string textNum)
+{
+    // Convert to int.
+    int num = std::stoi(textNum);
+
+    // Check the value.
+    if (num == 0)
+    {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// Create the object and return the result. (This will be nice for memory management.)
 
 // Create secret menu.
 
@@ -83,24 +99,117 @@ int main()
             // Convert the userInput to an int.
             int conUserInput = std::stoi(userInput);
 
-            // Addition.
-            if (conUserInput == 1)
+            // Quit the program.
+            if (conUserInput == 5)
             {
-                std::cout << "Addition Selected" << std::endl;
-            } else if (conUserInput == 2) {
-                std::cout << "Subtraction Selected" << std::endl;
-            } else if (conUserInput == 3) {
-                std::cout << "Multiplication Selected" << std::endl;
-            } else if (conUserInput == 4) {
-                std::cout << "Division Selected" << std::endl;
-            } else {
                 // Break the loop because the user is quiting the program.
                 mainEnd = true;
+            } else { // Do everything else.
+                // Create type of problem UI for user.
+                std::string problemSelected;
+                std::string symbol;
+
+                // Addition.
+                if (conUserInput == 1) 
+                {
+                    problemSelected = "Addition Selected:";
+                    symbol = "+";
+                } else if (conUserInput == 2) { // Subtraction.
+                    problemSelected = "Subtraction Selected: ";
+                    symbol = "-";
+                } else if (conUserInput == 3){ // Multiplication.
+                    problemSelected = "Multiplication Selected: ";
+                    symbol = "*";
+                } else { // Divison.
+                    problemSelected = "Division Selected: ";
+                    symbol = "/";
+                }
+
+                // Create a varible to break the loop.
+                bool success = false;
+
+                // Print the next part of UI.
+                std::cout << problemSelected << std::endl;
+                std::cout << "? " << symbol << " ? = ?" << std::endl;
+                std::cout << "" << std::endl;
+                // Create variable to hold input.
+                std::string textNumOne;
+                // First input check.
+                while (success == false)
+                {
+                    std::cout << "Please enter the first number: ";
+                    std::cin >> textNumOne;
+                    // Preform checks on the input.
+                    if (isNumb(textNumOne))
+                    {
+                        // Break the loop.
+                        success = true;
+                    } else {
+                        // We don't leave until the input is good to go.
+                        std::cout << "Input not a number." << std::endl;
+                        success = false;
+                    }
+                }
+                // Convert input one to a int.
+                int numOne = std::stoi(textNumOne);
+                // Display the current problem.
+                std::cout << numOne << " " << symbol <<  " ? = ?" << std::endl;
+                // Set success back to false for next check.
+                success = false;
+                // Create variable to hold second input.
+                std::string textNumTwo;
+                // Second input check.
+                while (success == false)
+                {
+                    std::cout << "Please enter the second number: ";
+                    std::cin >> textNumTwo;
+
+                    // Create a check for division to prevent divison by 0.
+                    if (conUserInput != 4) {
+                        // Preform checks on the input.
+                        if (isNumb(textNumTwo))
+                        {
+                            // Break the loop.
+                            success = true;
+                        } else {
+                            // We don't leave until the input is good to go.
+                            std::cout << "Input not a number." << std::endl;
+                            success = false;
+                        }
+                    } else {
+                        // Preform checks on the input.
+                        if (isNumb(textNumTwo) && !isZero(textNumTwo))
+                        {
+                            // Break the loop.
+                            success = true;
+                        } else {
+                            // We don't leave until the input is good to go.
+                            std::cout << "Input not a number or cannot divide by 0." << std::endl;
+                            success = false;
+                        }
+                    }
+                }
+                // Convert number two to a int.
+                int numTwo = std::stoi(textNumTwo);
+
+                // Let the user see their problem so far.
+                std::cout << "Here is your problem: " << std::endl;
+                std::cout << numOne << " " << symbol << " " << numTwo << " = ?" << std::endl;
+                // Press enter to continue on to the next step.
+                std::cout << "" << std::endl;
+                std::cout << "Press 'enter' to continue: ";
+                // Call this to clear up the inputs being accepted into the std bin.(If this is not cleared this will just move on because we already accepted an input before.)
+                std::cin.ignore();
+                // Use this to pause to continue on.
+                std::cin.get();
+                
+                // Call the function to create an object and then display the result to the user.
             }
         } else {
             // Not in range and is not a number.
             std::cout << "Input not reconized... Please input a valid number." << std::endl;
             // Put thread to sleep for better UI.
+            // NOTE: Maybe use an empty user input to do this instead...
             std::this_thread::sleep_for(std::chrono::seconds(2));
         }
     }
