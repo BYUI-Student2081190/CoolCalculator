@@ -67,6 +67,18 @@ bool isZero (const string textNum)
 }
 
 // Create the object and return the result. (This will be nice for memory management.)
+int problemSolution(int numOne, int numTwo, int problemType) 
+{
+    // Create the object.
+    Calc obj(20);
+    // Set the values.
+    obj.setProblem(numOne, numTwo, problemType);
+    // Now run the problem, this will set the solution of the object.
+    obj.runProblem();
+    // Now return the solution.
+    int solution = obj.getSolution();
+    return solution;
+}
 
 // Create secret menu.
 
@@ -97,10 +109,10 @@ int main()
         if (isNumb(userInput) && inRange(userInput, 1, 5))
         {
             // Convert the userInput to an int.
-            int conUserInput = std::stoi(userInput);
+            int problemType = std::stoi(userInput);
 
             // Quit the program.
-            if (conUserInput == 5)
+            if (problemType == 5)
             {
                 // Break the loop because the user is quiting the program.
                 mainEnd = true;
@@ -110,14 +122,14 @@ int main()
                 std::string symbol;
 
                 // Addition.
-                if (conUserInput == 1) 
+                if (problemType == 1) 
                 {
                     problemSelected = "Addition Selected:";
                     symbol = "+";
-                } else if (conUserInput == 2) { // Subtraction.
+                } else if (problemType == 2) { // Subtraction.
                     problemSelected = "Subtraction Selected: ";
                     symbol = "-";
-                } else if (conUserInput == 3){ // Multiplication.
+                } else if (problemType == 3){ // Multiplication.
                     problemSelected = "Multiplication Selected: ";
                     symbol = "*";
                 } else { // Divison.
@@ -165,7 +177,7 @@ int main()
                     std::cin >> textNumTwo;
 
                     // Create a check for division to prevent divison by 0.
-                    if (conUserInput != 4) {
+                    if (problemType != 4) {
                         // Preform checks on the input.
                         if (isNumb(textNumTwo))
                         {
@@ -204,6 +216,15 @@ int main()
                 std::cin.get();
                 
                 // Call the function to create an object and then display the result to the user.
+                int result = problemSolution(numOne, numTwo, problemType);
+
+                std::cout << "Here is the result:" << std::endl;
+                std::cout << numOne << " " << symbol << " " << numTwo << " = " << result << std::endl;
+                std::cout << "" << std::endl;
+                std::cout << "The answer is: " << result << std::endl;
+                std::cout << "" << std::endl;
+                std::cout << "Press 'enter' to continue: ";
+                std::cin.get();
             }
         } else {
             // Not in range and is not a number.
@@ -220,65 +241,4 @@ int main()
 
     // End Main Function.
     return 0;
-
-    // OLD MAIN. (Delete after new main is finished.)
-    // // Test if you can send a message.
-    // std::cout << "Hello World!" << std::endl;
-
-    // // Test if you can save variables.
-    // int number = 30;
-
-    // // Test to see if you can send a message and have a variable in it.
-    // std::cout << "My favorite number is " << number << "!" << std::endl;
-
-    // // Create a variable to loop the while loop until condition is met.
-    // bool loopBreak = false;
-
-    // // Create a while loop to keep asking for a number until they enter a proper number.
-    // while (loopBreak != true)
-    // {
-    //     // Create a string variable to hold the response.
-    //     std::string input;
-    //     std::cout << "What is your favorite number? (Please Enter:) ";
-    //     std::cin >> input;
-
-    //     // Test the input to see if we can leave the loop.
-    //     if (isNumb(input)) 
-    //     {
-    //         // Set the break condition.
-    //         loopBreak = true;
-
-    //         // Send message.
-    //         std::cout << "Your favorite number is " << input << "! That is so cool!" << std::endl;
-    //     } else {
-    //         // Set the break condition.
-    //         loopBreak = false;
-
-    //         // Send message.
-    //         std::cout << "Your input was not a number... Please input a number." << std::endl;
-    //     }
-    // }
-
-    // // Test counting section.
-    // std::cout << "What to see me count?" << std::endl;
-    // std::this_thread::sleep_for(std::chrono::seconds(5));
-
-    // for (int i = 1; i <= 10; ++i)
-    // {
-    //     std::cout << i << "...";
-    //     std::this_thread::sleep_for(std::chrono::seconds(1));
-    // }
-
-    // // Add a line end so the counting does not look weird.
-    // std::cout << endl;
-
-    // // Send message to see if we left the loop.
-    // std::cout << "Thank you for hanging out with me! Talk to you later! :)" << std::endl;
-
-
-    // // Test creating an object.
-    // Calc obj(20);
-    // std::cout << "Value of Object: " << obj.getValue() << std::endl;
-    // obj.setValue(15);
-    // std::cout << "New Value of Object: " << obj.getValue() << std::endl;
 }
