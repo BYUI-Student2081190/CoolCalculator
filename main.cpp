@@ -33,69 +33,122 @@ bool isNumb(const string testNum)
     return true;
 }
 
+// Test to see if input is in range. For menus and stuff.
+bool inRange (const string testNum, const int minRange, const int maxRange)
+{
+    // Convert testNum to int.
+    int conTestNum = std::stoi(testNum);
+
+    // Test if it is in range.
+    if (conTestNum >= minRange && conTestNum <= maxRange)
+    {
+        // Return true because this is good.
+        return true;
+    } else {
+        // This is not in range.
+        return false;
+    }
+}
+
 // Main function being ran
 int main()
 {
-    // Test if you can send a message.
-    std::cout << "Hello World!" << std::endl;
+    // CURRENT MAIN.
+    // Varible to break the loop.
+    bool mainEnd = false;
+    // Welcome the user to main and create a loop in main, until the user is done.
+    std::cout << "Welcome to the Cool Calculator!" << std::endl;
 
-    // Test if you can save variables.
-    int number = 30;
-
-    // Test to see if you can send a message and have a variable in it.
-    std::cout << "My favorite number is " << number << "!" << std::endl;
-
-    // Create a variable to loop the while loop until condition is met.
-    bool loopBreak = false;
-
-    // Create a while loop to keep asking for a number until they enter a proper number.
-    while (loopBreak != true)
+    while (mainEnd != true) 
     {
-        // Create a string variable to hold the response.
-        std::string input;
-        std::cout << "What is your favorite number? (Please Enter:) ";
-        std::cin >> input;
+        // Display options.
+        std::cout << "What would you like to do today?" << std::endl;
+        std::cout << "[1] Add" << std::endl;
+        std::cout << "[2] Subtract" << std::endl;
+        std::cout << "[3] Multiply" << std::endl;
+        std::cout << "[4] Divide" << std::endl;
+        std::cout << "[5] Quit" << std::endl;
 
-        // Test the input to see if we can leave the loop.
-        if (isNumb(input)) 
+        // Get the user input.
+        std::string userInput;
+        std::cout << "Please enter the number of the option you would like: ";
+        std::cin >> userInput;
+        // Check the input to see if it is 1.) a number, and 2.) in answer range.
+        if (isNumb(userInput) && inRange(userInput, 1, 5))
         {
-            // Set the break condition.
-            loopBreak = true;
-
-            // Send message.
-            std::cout << "Your favorite number is " << input << "! That is so cool!" << std::endl;
+            // Test this.
+            std::cout << "That is in range" << std::endl;
+            // Break loop for test.
+            mainEnd = true;
         } else {
-            // Set the break condition.
-            loopBreak = false;
-
-            // Send message.
-            std::cout << "Your input was not a number... Please input a number." << std::endl;
+            // Not in range and is not a number.
+            std::cout << "Input not reconized... Please input a valid number." << std::endl;
+            // Put thread to sleep for better UI.
+            std::this_thread::sleep_for(std::chrono::seconds(2));
         }
     }
 
-    // Test counting section.
-    std::cout << "What to see me count?" << std::endl;
-    std::this_thread::sleep_for(std::chrono::seconds(5));
+    // OLD MAIN. (Delete after new main is finished.)
+    // // Test if you can send a message.
+    // std::cout << "Hello World!" << std::endl;
 
-    for (int i = 1; i <= 10; ++i)
-    {
-        std::cout << i << "...";
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-    }
+    // // Test if you can save variables.
+    // int number = 30;
 
-    // Add a line end so the counting does not look weird.
-    std::cout << endl;
+    // // Test to see if you can send a message and have a variable in it.
+    // std::cout << "My favorite number is " << number << "!" << std::endl;
 
-    // Send message to see if we left the loop.
-    std::cout << "Thank you for hanging out with me! Talk to you later! :)" << std::endl;
+    // // Create a variable to loop the while loop until condition is met.
+    // bool loopBreak = false;
+
+    // // Create a while loop to keep asking for a number until they enter a proper number.
+    // while (loopBreak != true)
+    // {
+    //     // Create a string variable to hold the response.
+    //     std::string input;
+    //     std::cout << "What is your favorite number? (Please Enter:) ";
+    //     std::cin >> input;
+
+    //     // Test the input to see if we can leave the loop.
+    //     if (isNumb(input)) 
+    //     {
+    //         // Set the break condition.
+    //         loopBreak = true;
+
+    //         // Send message.
+    //         std::cout << "Your favorite number is " << input << "! That is so cool!" << std::endl;
+    //     } else {
+    //         // Set the break condition.
+    //         loopBreak = false;
+
+    //         // Send message.
+    //         std::cout << "Your input was not a number... Please input a number." << std::endl;
+    //     }
+    // }
+
+    // // Test counting section.
+    // std::cout << "What to see me count?" << std::endl;
+    // std::this_thread::sleep_for(std::chrono::seconds(5));
+
+    // for (int i = 1; i <= 10; ++i)
+    // {
+    //     std::cout << i << "...";
+    //     std::this_thread::sleep_for(std::chrono::seconds(1));
+    // }
+
+    // // Add a line end so the counting does not look weird.
+    // std::cout << endl;
+
+    // // Send message to see if we left the loop.
+    // std::cout << "Thank you for hanging out with me! Talk to you later! :)" << std::endl;
 
 
-    // Test creating an object.
-    Calc obj(20);
-    std::cout << "Value of Object: " << obj.getValue() << std::endl;
-    obj.setValue(15);
-    std::cout << "New Value of Object: " << obj.getValue() << std::endl;
+    // // Test creating an object.
+    // Calc obj(20);
+    // std::cout << "Value of Object: " << obj.getValue() << std::endl;
+    // obj.setValue(15);
+    // std::cout << "New Value of Object: " << obj.getValue() << std::endl;
 
-    // End function.
+    // End Main Function.
     return 0;
 }
