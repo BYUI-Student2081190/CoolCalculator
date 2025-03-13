@@ -71,7 +71,65 @@ bool isZero (const string textNum)
     }
 }
 
-// Function that obtains an object from the heap.
+// Function that obtains an object from the heap and displays it for the user.
+void viewMemory(int indexPlusOne)
+{
+    // Same idea as the deleteOnePointer except with a few changes.
+    // First we need to convert the index into the proper one.
+    int index = indexPlusOne - 1;
+
+    // Now we loop to find the index of the matching memory object in the list.
+    int count = 0;
+
+    for(Calc *obj : calc_list) {
+        // Look and see if we are at the index.
+        if (count == index) {
+            // Display the information to the user.
+            std::cout << "------------------------------------------------" << std::endl;
+            std::cout << "Memory No: " << indexPlusOne << std::endl;
+            std::cout << "First Number: " << obj->getNumOne() << std::endl;
+            std::cout << "Second Number: " << obj->getNumTwo() << std::endl;
+            // Display the type of problem.
+            if (obj->getProblemType() == 1) {
+                std::cout << "Problem Type: Addition" << std::endl;
+            } else if (obj->getProblemType() == 2) {
+                std::cout << "Problem Type: Subtraction" << std::endl;
+            } else if (obj->getProblemType() == 3) {
+                std::cout << "Problem Type: Multiplication" << std::endl;
+            } else {
+                std::cout << "Problem Type: Division" << std::endl;
+            }
+            // Display the solution.
+            std::cout << "Solution: " << obj->getSolution() << std::endl;
+            // Display the full problem.
+            if (obj->getProblemType() == 1) {
+                std::cout << obj->getNumOne() << " + " << obj->getNumTwo() << " = " << obj->getSolution() << std::endl;
+            } else if (obj->getProblemType() == 2) {
+                std::cout << obj->getNumOne() << " - " << obj->getNumTwo() << " = " << obj->getSolution() << std::endl;
+            } else if (obj->getProblemType() == 3) {
+                std::cout << obj->getNumOne() << " * " << obj->getNumTwo() << " = " << obj->getSolution() << std::endl;
+            } else {
+                std::cout << obj->getNumOne() << " / " << obj->getNumTwo() << " = " << obj->getSolution() << std::endl;
+            }
+            std::cout << "------------------------------------------------" << std::endl;
+            // Now break the loop.
+            break;
+        }
+
+        // If it is not found, then we add one to count.
+        count += 1;
+    }
+
+    // Tell them to press enter to continue.
+    std::cout << "Press 'enter' to continue: ";
+    // Call this to clear up the inputs being accepted into the std bin.(If this is not cleared this will just move on because we already accepted an input before.)
+    std::cin.ignore();
+    // Use this to pause to continue on.
+    std::cin.get();
+
+    // Return back to the original function.
+    return;
+}
 
 // Function that dynamically deletes an object from the heap.
 void deleteOnePointer(int index) 
@@ -138,35 +196,36 @@ void secretMenu()
         // Return.
         return;
     } else {
-        // Welcome the user.
-        std::cout << "Welcome to memory! Here are the last 5 problems you have done so far:" << std::endl;
-        // Create a variable to display the position of each memory object.
-        int mem = 0;
-        // Display all the objects here using a for each loop.
-        for (Calc *obj : calc_list) {
-            // Set mem plus 1 for each object in the list.
-            mem += 1;
-            // Now display the object by it's problem type.
-            if (obj->getProblemType() == 1) {
-                // Display it.
-                std::cout << "[" << mem << "] Addition" << std::endl;
-            } else if (obj->getProblemType() == 2) {
-                std::cout << "[" << mem << "] Subtraction" << std::endl; 
-            } else if (obj->getProblemType() == 3) {
-                std::cout << "[" << mem << "] Multiplication" << std::endl;
-            } else {
-                std::cout << "[" << mem << "] Division" << std::endl;
-            }
-
-        }
-
-        // Create one more to allow them to go back if they would like.
-        std::cout << "[6] Go Back" << std::endl;
-        
         // Create a loop to make sure they select a response.
         bool loopStop = false;
         // Ask them to select one they would like to use.
-        while (loopStop = false) {
+        while (loopStop != true) {
+            // Create a variable to display the position of each memory object.
+            int mem = 0;
+            // Welcome the user.
+            std::cout << "Welcome to memory! Here are the last " << calc_list.size() << " problems you have done so far:" << std::endl;
+            // Display all the objects here using a for each loop.
+            for (Calc *obj : calc_list) {
+                // Set mem plus 1 for each object in the list.
+                mem += 1;
+                // Now display the object by it's problem type.
+                if (obj->getProblemType() == 1) {
+                    // Display it.
+                    std::cout << "[" << mem << "] Addition" << std::endl;
+                } else if (obj->getProblemType() == 2) {
+                    std::cout << "[" << mem << "] Subtraction" << std::endl; 
+                } else if (obj->getProblemType() == 3) {
+                    std::cout << "[" << mem << "] Multiplication" << std::endl;
+                } else {
+                    std::cout << "[" << mem << "] Division" << std::endl;
+                }
+
+            }
+
+            // Create one more to allow them to go back if they would like.
+            std::cout << "[6] Go Back" << std::endl;
+        
+        
             std::string userInput;
             std::cout << "" << std::endl;
             std::cout << "Please select which one you would like to view: ";
@@ -175,7 +234,21 @@ void secretMenu()
             // Check the input to move on.
             if (isNumb(userInput)) {
                 // Go on to the next check.
-                loopStop = true;
+                // Convert userInput for here.
+                int userNum = std::stoi(userInput);
+                if (userNum == 6) 
+                {
+                    // End the loop.
+                    loopStop = true;
+                } else if (inRange(userInput, 1, mem)) {
+                    // Take the user where they need to go and allow them to view it.
+                    viewMemory(userNum);
+                    // Don't break the loop because we will only break when they say to go back.
+                    loopStop = false;
+                } else {
+                    // Let the user know their mistake.
+                    std::cout << "The number you chose was not an option. Please select an option." << std::endl;
+                }
             } else {
                 // Error message, and then set loopStop to false.
                 std::cout << "Input is not a number please try again." << std::endl;
