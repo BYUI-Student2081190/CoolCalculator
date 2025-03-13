@@ -1,19 +1,23 @@
 # Overview
 
-{Important! Do not say in this section that this is college assignment. Talk about what you are trying to accomplish as a software engineer to further your learning.}
+This software is a calculator with a working memory using C++. This project makes use of classes, loops, functions, and it also makes use of memory managment through the new and delete functions. The program can do basic math with ease and the memory is stored and deleted manually. How this works is by every time a user does a problem and gets an answer, their problem and answer are then allowed a place in memory with the new function and the pointer to that spot in memory is stored inside a list. When the list reaches a length of five the program automatically removes the first object in the list, and then clears up that spot in memory by deleting it using the delete function. It then destroys the pointer to prevent memory leaking. Another thing this program does right before it is closed it makes sure to delete all the memory being used by the software and then clears the list to prevent memory leakage as well. This allows for dynamic object creation and memory managment.
 
-{Provide a description of the software that you wrote to demonstrate the C++ language.}
-
-{Describe your purpose for writing this software.}
-
-{Provide a link to your YouTube demonstration. It should be a 4-5 minute demo of the software running and a walkthrough of the code. Focus should be on sharing what you learned about the language syntax.}
+The purpose behind writing this software was to show myself that I could learn a new language. I know Python, C#, JavaScript, HTML, and CSS; but I did not know anything about C++. I decided to spend two weeks learning all that I could on C++ and then make a basic program in that time displaying what I was learning. I also made sure to do a lot of things the long hand way just so I could deepen my understanding of how C++ worked. Because of this I feel like my purpose was completed, and I feel confident that I can write in C++ and even learn more about it with greater ease and comfort.
 
 
 # Development Environment
 
-{Describe the tools that you used to develop the software}
+Tools:
+- VSCode.
 
-{Describe the programming language that you used and any libraries.}
+Programming Languages: 
+- C++.
+
+Libraries:
+- iostream: This allowed the program to use input and outputs into the terminal.
+- string: Used to allow the use of strings in c++.
+- cctype: Used for seeing if varibles are certain types.
+- list: Allowed for the creation of lists in c++.
 
 # Useful Websites
 - [Visual Studio Code - Docs : Getting Started](https://code.visualstudio.com/docs/cpp/introvideos-cpp)
@@ -29,9 +33,6 @@
 - [Youtube - Portfolio Courses: new & delete Operators For Dynamic Memory Allocation | C++ Tutorial](https://www.youtube.com/watch?v=wopESdEVJs4)
 
 # Future Work
-
-{Make a list of things that you need to fix, improve, and add in the future.}
-
-- Item 1
-- Item 2
-- Item 3
+- Add a way to let the user manage their own memory within the system.
+- Allow different cool features like getting the sum, solving for exponents, and other complex math.
+- Add a way to add, subtract, multiply, and divide decimals.
