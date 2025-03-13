@@ -66,17 +66,23 @@ bool isZero (const string textNum)
     }
 }
 
-// Create the object and return the result. (This will be nice for memory management.)
+// Create the object and return the result.
 int problemSolution(int numOne, int numTwo, int problemType) 
 {
-    // Create the object.
-    Calc obj(20);
-    // Set the values.
-    obj.setProblem(numOne, numTwo, problemType);
-    // Now run the problem, this will set the solution of the object.
-    obj.runProblem();
-    // Now return the solution.
-    int solution = obj.getSolution();
+    // Create the object dynamically with new, giving it space on the heap.
+    Calc *calc_pointer = new Calc(20);
+    // Set the values of the object on the heap.
+    (*calc_pointer).setProblem(numOne, numTwo, problemType);
+    // Now run the problem, this will set the solution of the object on the heap.
+    (*calc_pointer).runProblem();
+    // Now save the solution to a variable to return to the main program.
+    int solution = calc_pointer->getSolution(); // The arrow way to run these commands.
+
+    // Now delete it to free space on the heep and prevent memory leaks.
+    delete calc_pointer;
+    calc_pointer = nullptr; // Good practice to reset the pointer to avoid dangling pointers.
+
+    // Return the solution to the main function.
     return solution;
 }
 
@@ -229,9 +235,13 @@ int main()
         } else {
             // Not in range and is not a number.
             std::cout << "Input not reconized... Please input a valid number." << std::endl;
-            // Put thread to sleep for better UI.
-            // NOTE: Maybe use an empty user input to do this instead...
-            std::this_thread::sleep_for(std::chrono::seconds(2));
+            // Put an option to hit enter here to make it so you can continue back to selecting a better response.
+            std::cout << "" << std::endl;
+            std::cout << "Press 'enter' to continue: ";
+            // Call this to clear up the inputs being accepted into the std bin.(If this is not cleared this will just move on because we already accepted an input before.)
+            std::cin.ignore();
+            // Use this to pause to continue on.
+            std::cin.get();
         }
     }
 
