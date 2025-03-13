@@ -23,7 +23,9 @@
 - [W3Schools - C++ While Loops](https://www.w3schools.com/cpp/cpp_while_loop.asp)
 - [W3Schools - C++ For Loops](https://www.w3schools.com/cpp/cpp_for_loop.asp)
 - [W3Schools - C++ Classes](https://www.w3schools.com/cpp/cpp_classes.asp)
-- [Youtube - Professor Hank Stalica:C++ Create Your Own Class Header Files](https://www.youtube.com/watch?v=Yr2LNtrRIUs)
+- [W3Schools - C++ Lists](https://www.w3schools.com/cpp/cpp_list.asp)
+- [Youtube - Professor Hank Stalica: C++ Create Your Own Class Header Files](https://www.youtube.com/watch?v=Yr2LNtrRIUs)
+- [Youtube - Portfolio Courses: new & delete Operators For Dynamic Memory Allocation | C++ Tutorial](https://www.youtube.com/watch?v=wopESdEVJs4)
 
 # Future Work
 
