@@ -1,9 +1,6 @@
 #include <iostream>
 #include <string>
 #include <cctype>
-// Added these to use thread sleeping to create better UI.
-#include <chrono>
-#include <thread>
 // Include this library to use lists.
 #include <list>
 // Include the class into the main file.
